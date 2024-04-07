@@ -20,7 +20,7 @@ var iterators = {
 
   slides.forEach(function(slide, index) {
     console.log("Processing slide #" + (index + 1));
-    var randomizer = index % 2 === 0 ? 2 : 1;
+    var randomizer = index % 2 === 0 ? 1 : 2;
 
     slide.getShapes().forEach(function(shape) {
       if (shape.getShapeType() === SlidesApp.ShapeType.TEXT_BOX) {
@@ -49,9 +49,9 @@ var iterators = {
             if (fileType === 'small') {
               size = { width: 30, height: 35 };
             } else if (fileType === 'middle') {
-              size = { width: 50, height: 60 };
+              size = { width: 60, height: 75 };
             } else {
-              size = { width: 80, height: 120 };
+              size = { width: 90, height: 130 };
             }
 
             addPicToSlide(file, slide, shape, size.width, size.height);
