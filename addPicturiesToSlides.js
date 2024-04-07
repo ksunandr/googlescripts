@@ -31,7 +31,7 @@ var iterators = {
       if (shape.getShapeType() === SlidesApp.ShapeType.TEXT_BOX) {
         var text = shape.getText().asString();
         console.log(text); // Log the text found
-        
+        if (text.includes('pic')) {
         var fileType = '';
         if (text.includes('{pic}')) fileType = 'big';
         else if (text.includes(`{pic${randomizer}}`)) fileType = 'big';
@@ -55,6 +55,8 @@ var iterators = {
 
 
           addPicToSlide(file, slide, shape, size.width, size.height);
+        }
+        
           shape.remove(); // Remove the placeholder text box
         }
       }
