@@ -41,7 +41,7 @@ var iterators = {
             iterators['small'] = folders['small'].getFiles();
           }
 
-          if (iterators['big'].hasNext()) {
+          if (fileType && iterators['big'].hasNext()) {
 
             var file = iterators[fileType].next();            
             
