@@ -6,10 +6,18 @@ function addPicturesToSlides() {
 
   // Simplify folder and file retrieval
   var folders = {
-    default: DriveApp.getFolderById('1D_12WrwhX8p9PDwKggBOAPmH9v8FUtC9'), // main folder
+    big: DriveApp.getFolderById('1D_12WrwhX8p9PDwKggBOAPmH9v8FUtC9'), // main folder
     small: DriveApp.getFolderById('18JFnTh89XY3g-3OH1ynexOTrSa9OX9au'), // small images
     middle: DriveApp.getFolderById('1VGTR9908WUTcS9tCaCLU_tWiJfN1hO1A') // middle images
   };
+
+    // Simplify folder and file retrieval
+  var iterators = {
+   big: folders[big].getFiles(), // main folder
+   small: folders[small].getFiles(), // small images
+    middle:folders[middle].getFiles() // middle images
+  };
+
 
   console.log(2); // Indicate that slides and files are ready for processing
 
@@ -28,8 +36,8 @@ function addPicturesToSlides() {
         else if (text.includes(`{midpic${randomizer}}`)) fileType = 'middle';
         else if (text.includes(`{smallpic${randomizer}}`)) fileType = 'small';
 
-        if (fileType && folders[fileType].getFiles().hasNext()) {
-          var file = folders[fileType].getFiles().next();
+        if (fileType && iterators[fileType].hasNext()) {
+          var file = iterators[fileType].next();
           
           console.log("Processing file " + file.getName() +" " + fileType);
           
