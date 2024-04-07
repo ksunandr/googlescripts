@@ -34,7 +34,8 @@ var iterators = {
           if (text.includes('{pic}')) fileType = 'big';
           else if (text.includes(`{pic${randomizer}}`)) fileType = 'big';
           else if (text.includes(`{midpic${randomizer}}`)) fileType = 'middle';
-          else if (text.includes(`{smallpic${randomizer}}`)) fileType = 'small';
+          else if (text.includes(`{smallpic}`)) fileType = 'small';
+           else if (text.includes(`{smallpic${randomizer}}`)) fileType = 'small';
 
 
           if (fileType =='middle' && !iterators['middle'].hasNext()) {
