@@ -11,12 +11,17 @@ var folders = {
   middle: DriveApp.getFolderById('1VGTR9908WUTcS9tCaCLU_tWiJfN1hO1A') // middle images
 };
 
-// Simplify file retrieval with iterators
-var iterators = {
-  big: folders['big'].getFiles(), // main images
-  small: folders['small'].getFiles(), // small images
-  middle: folders['middle'].getFiles() // middle images
+var fileArrays = {
+  big: collectFiles(folders['big'].getFiles()), // Collect and then shuffle
+  small: collectFiles(folders['small'].getFiles()),
+  middle: collectFiles(folders['middle'].getFiles())
 };
+
+// Shuffle each array of files
+shuffleArray(fileArrays.big);
+shuffleArray(fileArrays.small);
+shuffleArray(fileArrays.middle);
+
 
   slides.forEach(function(slide, index) {
     console.log("Processing slide #" + (index + 1));
@@ -34,16 +39,26 @@ var iterators = {
           else if (text.includes(`{smallpic${randomizer}}`)) fileType = 'small';
 
 
-          if (fileType =='middle' && !iterators['middle'].hasNext()) {
-            iterators['middle'] = folders['middle'].getFiles();
-          }
+           var file 
+
+          if (fileType ) {
+            for (var i = 0; i < fileArrays.big.length; i++) {
+
+          if (fileType =='middle' && i >=fileArrays.middle.length ) {
+              file = fileArrays['middle'][i%fileArrays.middle.length];                
+           } else {
           if (fileType =='small' && !iterators['small'].hasNext()) {
-            iterators['small'] = folders['small'].getFiles();
+             file = fileArrays['small'][i%fileArrays.small.length];
+          } else {
+             file = fileArrays[fileType][i];
+          }
+          
           }
 
-          if (fileType && iterators['big'].hasNext()) {
 
-            var file = iterators[fileType].next();            
+
+           
+
             
             var size;
             if (fileType === 'small') {
@@ -56,6 +71,7 @@ var iterators = {
 
             addPicToSlide(file, slide, shape, size.width, size.height);
           }
+          }
           
           shape.remove(); // Remove the placeholder text box
         }
@@ -65,6 +81,23 @@ var iterators = {
 
   console.log("end " +countItemsInIterator(iterators['big'])); // Indicate script completion
 }
+
+
+function collectFiles(iterator) {
+  var files = [];
+  while (iterator.hasNext()) {
+    files.push(iterator.next());
+  }
+  return files;
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+    [array[i], array[j]] = [array[j], array[i]]; // swap elements
+  }
+}
+
 
 function countItemsInIterator(iterator) {
   var count = 0;
