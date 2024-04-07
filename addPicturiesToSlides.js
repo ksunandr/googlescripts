@@ -51,7 +51,7 @@ var iterators = {
             } else if (fileType === 'middle') {
               size = { width: 60, height: 75 };
             } else {
-              size = { width: 90, height: 130 };
+              size = { width: 100, height: 140 };
             }
 
             addPicToSlide(file, slide, shape, size.width, size.height);
