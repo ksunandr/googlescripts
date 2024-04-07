@@ -18,6 +18,9 @@ var iterators = {
   middle: folders['middle'].getFiles() // middle images
 };
 
+  console.log("start " +countItemsInIterator(iterators['big'])); // Indicate script completion
+
+
   slides.forEach(function(slide, index) {
     console.log("Processing slide #" + (index + 1));
     var randomizer = index % 2 === 0 ? 1 : 2;
