@@ -4,19 +4,21 @@ function addPicturesToSlides() {
 
   var slides = presentation.getSlides();
 
-  // Simplify folder and file retrieval
-  var folders = {
-    big: DriveApp.getFolderById('1D_12WrwhX8p9PDwKggBOAPmH9v8FUtC9'), // main folder
-    small: DriveApp.getFolderById('18JFnTh89XY3g-3OH1ynexOTrSa9OX9au'), // small images
-    middle: DriveApp.getFolderById('1VGTR9908WUTcS9tCaCLU_tWiJfN1hO1A') // middle images
-  };
+// Simplify folder and file retrieval
+var folders = {
+  big: DriveApp.getFolderById('1D_12WrwhX8p9PDwKggBOAPmH9v8FUtC9'), // main folder
+  small: DriveApp.getFolderById('18JFnTh89XY3g-3OH1ynexOTrSa9OX9au'), // small images
+  middle: DriveApp.getFolderById('1VGTR9908WUTcS9tCaCLU_tWiJfN1hO1A') // middle images
+};
+console.log(1); // Indicate that slides and files are ready for processing
 
-    // Simplify folder and file retrieval
-  var iterators = {
-   big: folders[big].getFiles(), // main folder
-   small: folders[small].getFiles(), // small images
-    middle:folders[middle].getFiles() // middle images
-  };
+// Simplify file retrieval with iterators
+var iterators = {
+  big: folders['big'].getFiles(), // main images
+  small: folders['small'].getFiles(), // small images
+  middle: folders['middle'].getFiles() // middle images
+};
+
 
 
   console.log(2); // Indicate that slides and files are ready for processing
@@ -31,8 +33,8 @@ function addPicturesToSlides() {
         console.log(text); // Log the text found
         
         var fileType = '';
-        if (text.includes('{pic}')) fileType = 'default';
-        else if (text.includes(`{pic${randomizer}}`)) fileType = 'default';
+        if (text.includes('{pic}')) fileType = 'big';
+        else if (text.includes(`{pic${randomizer}}`)) fileType = 'big';
         else if (text.includes(`{midpic${randomizer}}`)) fileType = 'middle';
         else if (text.includes(`{smallpic${randomizer}}`)) fileType = 'small';
 
