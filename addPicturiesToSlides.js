@@ -19,7 +19,7 @@ var iterators = {
 };
 
   console.log("start " +countItemsInIterator(iterators['big'])); // Indicate script completion
-
+iterators['big']=folders['big'].getFiles();
 
   slides.forEach(function(slide, index) {
     console.log("Processing slide #" + (index + 1));
@@ -35,7 +35,7 @@ var iterators = {
           else if (text.includes(`{pic${randomizer}}`)) fileType = 'big';
           else if (text.includes(`{midpic${randomizer}}`)) fileType = 'middle';
           else if (text.includes(`{smallpic}`)) fileType = 'small';
-           else if (text.includes(`{smallpic${randomizer}}`)) fileType = 'small';
+          else if (text.includes(`{smallpic${randomizer}}`)) fileType = 'small';
 
 
           if (fileType =='middle' && !iterators['middle'].hasNext()) {
