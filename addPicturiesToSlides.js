@@ -18,8 +18,6 @@ var iterators = {
   middle: folders['middle'].getFiles() // middle images
 };
 
-
-
   slides.forEach(function(slide, index) {
     console.log("Processing slide #" + (index + 1));
     var randomizer = index % 2 === 0 ? 2 : 1;
@@ -35,20 +33,26 @@ var iterators = {
           else if (text.includes(`{midpic${randomizer}}`)) fileType = 'middle';
           else if (text.includes(`{smallpic${randomizer}}`)) fileType = 'small';
 
-          if (fileType && iterators[fileType].hasNext()) {
-            var file = iterators[fileType].next();
-            
+
+          if (fileType =='middle' && !iterators['middle'].hasNext()) {
+            iterators['middle'] = folders['middle'].getFiles();
+          }
+          if (fileType =='small' && !iterators['small'].hasNext()) {
+            iterators['small'] = folders['small'].getFiles();
+          }
+
+          if (iterators['big'].hasNext()) {
+
+            var file = iterators[fileType].next();            
             
             var size;
-
             if (fileType === 'small') {
-              size = { width: 25, height: 35 };
+              size = { width: 30, height: 35 };
             } else if (fileType === 'middle') {
-              size = { width: 45, height: 55 };
+              size = { width: 50, height: 60 };
             } else {
-              size = { width: 70, height: 100 };
+              size = { width: 80, height: 120 };
             }
-
 
             addPicToSlide(file, slide, shape, size.width, size.height);
           }
