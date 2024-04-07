@@ -18,9 +18,6 @@ var iterators = {
   middle: folders['middle'].getFiles() // middle images
 };
 
-  console.log("start " +countItemsInIterator(iterators['big'])); // Indicate script completion
-iterators['big']=folders['big'].getFiles();
-
   slides.forEach(function(slide, index) {
     console.log("Processing slide #" + (index + 1));
     var randomizer = index % 2 === 0 ? 1 : 2;
@@ -34,7 +31,6 @@ iterators['big']=folders['big'].getFiles();
           if (text.includes('{pic}')) fileType = 'big';
           else if (text.includes(`{pic${randomizer}}`)) fileType = 'big';
           else if (text.includes(`{midpic${randomizer}}`)) fileType = 'middle';
-          else if (text.includes(`{smallpic}`)) fileType = 'small';
           else if (text.includes(`{smallpic${randomizer}}`)) fileType = 'small';
 
 
