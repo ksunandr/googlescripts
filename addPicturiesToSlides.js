@@ -21,43 +21,46 @@ var fileArrays = {
 shuffleArray(fileArrays.big);
 shuffleArray(fileArrays.small);
 shuffleArray(fileArrays.middle);
-
+var i=0;
 
   slides.forEach(function(slide, index) {
+      if (i < fileArrays.big.length){
     console.log("Processing slide #" + (index + 1));
     var randomizer = index % 2 === 0 ? 1 : 2;
 
+                
     slide.getShapes().forEach(function(shape) {
+    
+
       if (shape.getShapeType() === SlidesApp.ShapeType.TEXT_BOX) {
         var text = shape.getText().asString();
+       
 
         if (text.includes('pic')) {
+           console.log("text " + (text));
           var fileType = '';
           if (text.includes('{pic}')) fileType = 'big';
           else if (text.includes(`{pic${randomizer}}`)) fileType = 'big';
           else if (text.includes(`{midpic${randomizer}}`)) fileType = 'middle';
           else if (text.includes(`{smallpic${randomizer}}`)) fileType = 'small';
+          else if (text.includes(`{smallpic}`)) fileType = 'small';
+         console.log("fileType " + (fileType));
 
+          var file;
 
-           var file 
-
-          if (fileType ) {
-            for (var i = 0; i < fileArrays.big.length; i++) {
+          if (fileType ) {           
 
           if (fileType =='middle' && i >=fileArrays.middle.length ) {
               file = fileArrays['middle'][i%fileArrays.middle.length];                
-           } else {
-          if (fileType =='small' && !iterators['small'].hasNext()) {
-             file = fileArrays['small'][i%fileArrays.small.length];
           } else {
-             file = fileArrays[fileType][i];
+            if (fileType =='small' && i >=fileArrays.middle.length) {
+              file = fileArrays['small'][i%fileArrays.small.length];
+            } else {
+              file = fileArrays[fileType][i];
+            }          
           }
-          
-          }
-
-
-
-           
+            
+            console.log("file " + (file));        
 
             
             var size;
@@ -69,17 +72,24 @@ shuffleArray(fileArrays.middle);
               size = { width: 100, height: 140 };
             }
 
+
             addPicToSlide(file, slide, shape, size.width, size.height);
+
+            
+           
+                        i++;
+
           }
-          }
-          
-          shape.remove(); // Remove the placeholder text box
+           shape.remove(); // Remove the placeholder text box
+           
         }
       }
+                
     });
+  }
   });
 
-  console.log("end " +countItemsInIterator(iterators['big'])); // Indicate script completion
+  // console.log("end " +countItemsInIterator(iterators['big'])); // Indicate script completion
 }
 
 
