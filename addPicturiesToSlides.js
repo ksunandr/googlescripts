@@ -53,8 +53,11 @@ var i=0;
           if (fileType =='middle' && i >=fileArrays.middle.length ) {
               file = fileArrays['middle'][i%fileArrays.middle.length];                
           } else {
-            if (fileType =='small' && i >=fileArrays.middle.length) {
+            if (fileType =='small' && i >=fileArrays.small.length) {
               file = fileArrays['small'][i%fileArrays.small.length];
+            } 
+            if (fileType =='big' && i >=fileArrays.big.length) {
+              file = fileArrays['big'][i%fileArrays.big.length];
             } else {
               file = fileArrays[fileType][i];
             }          
